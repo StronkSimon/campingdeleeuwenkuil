@@ -51,12 +51,57 @@ header { justify-content: space-between; }
 .job-card[open] { box-shadow: 0 6px 24px rgba(0,0,0,0.06); border-color:#d7eadc; }
 .job-card .job-content { margin-top: 10px; }
 .job-card h3 { margin: 0; }
+
+/* Popup modal styling */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0; top: 0;
+  width: 100%; height: 100%;
+  background-color: rgba(0,0,0,0.4);
+  backdrop-filter: blur(3px);
+  align-items: center;
+  justify-content: center;
+}
+.modal-content {
+  background: white;
+  max-width: 700px;
+  width: 90%;
+  padding: 24px;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+  max-height: 80vh;
+  overflow-y: auto;
+}
+.close {
+  float: right;
+  font-size: 24px;
+  cursor: pointer;
+  color: #333;
+}
+
+/* Use modal only, do not expand details inline */
+.job-card .job-content { display: none !important; }
+.job-card summary { cursor: default; } /* disable pointer cue */
+.job-card summary::-webkit-details-marker { display:none; }
+/* keep button clickable even if placed in summary */
+.job-card summary .leesmeer { pointer-events: auto; }
+
+/* Modal title styling */
+.modal-title { 
+  font-size: clamp(1.4rem, 1rem + 1.2vw, 1.9rem);
+  font-weight: 800;
+  color: var(--green);
+  margin: 0 0 12px 0;
+}
 </style>
 </head>
 <body>
 <div class="wrap">
 <header>
-<img alt="Camping de Leeuwenkuil logo" height="72" src="logo.png" width="72"/><div>
+<img alt="Camping de Leeuwenkuil logo" height="72" src="logo.png" width="72"/>
+<div>
 <h1>Camping de Leeuwenkuil</h1>
 <div class="tagline">Knus, groen &amp; een tikkie leeuwachtig 🦁⛺</div>
 </div>
@@ -68,7 +113,7 @@ header { justify-content: space-between; }
 </section>
 <section>
 <h2>Openstaande vacatures</h2>
-<div class="jobs-grid"><details class="card job-card"><summary><h3>Fulltime Facilitair Medewerker</h3><p class="muted">Fulltime · Utrecht</p><p>Klik om de volledige vacature te openen.</p></summary><div class="job-content"><p>Fulltime facilitair medewerker worden bij Camping de Leeuwenkuil in Utrecht?</p>
+<div class="jobs-grid"><details class="card job-card"><summary><h3>Fulltime Facilitair Medewerker</h3><p class="muted">Fulltime · Utrecht</p><p>Als facilitair medewerker van Camping de Leeuwenkuil zorg jij ervoor dat onze vaste gasten en hun vrienden en familie kunnen genieten van een schone, goed functionerende camping</p><button class="btn leesmeer">Lees meer</button></summary><div class="job-content"><p>Fulltime facilitair medewerker worden bij Camping de Leeuwenkuil in Utrecht?</p>
 <p>Houd jij van een keuken zonder kapotte apparaten, en ben je een held met hygiëne? Ga dan fulltime aan de slag als facilitair medewerker bij Camping de Leeuwenkuil!</p>
 <p>Wat ga je doen?</p>
 <p>Als facilitair medewerker van Camping de Leeuwenkuil zorg jij ervoor dat onze vaste gasten en hun vrienden en familie kunnen genieten van een schone, goed functionerende camping. Jij houdt de boel draaiende: je brengt het afval weg, maakt het sanitair schoon en bestelt nieuwe apparaten als er iets stuk is. Dankzij jou blijft de Leeuwenkuil 24/7 up and running — of in ieder geval leefbaar.</p>
@@ -95,6 +140,7 @@ header { justify-content: space-between; }
 <p>Solliciteren!</p>
 <p>Ben jij de perfecte kandidaat voor deze vacature en voldoe je aan de eisen? Mail dan naar info@deleeuwenkuil.nl en we nemen zo snel mogelijk contact met je op!</p>
 <p>Camping de Leeuwenkuil – waar de faciliteiten kapot gaan, maar de sfeer nooit. 🏕️</p><a class="btn" href="mailto:info@deleeuwenkuil.nl?subject=Sollicitatie%20Facilitair%20Medewerker">Solliciteer</a></div></details>
+</section>
 <section class="card" style="margin-top:20px;">
 <h2>Open sollicitatie</h2>
 <p>Niks gevonden dat past? Stuur je CV en korte motivatie naar <a href="mailto:info@deleeuwenkuil.nl">info@deleeuwenkuil.nl</a>. We denken graag mee.</p>
@@ -109,5 +155,43 @@ header { justify-content: space-between; }
     .job-card .perks { margin: 8px 0 12px; padding-left: 18px; }
     .btn { display:inline-block; background:var(--gold); color:black; text-decoration:none; padding:10px 14px; border-radius:10px; font-weight:600; }
   </style>
+<div class="modal" id="vacatureModal">
+<div class="modal-content">
+<span class="close">×</span>
+<div id="modalBody"></div>
+</div>
+</div>
+
+
+<script>
+// Block default <summary> toggle behavior
+document.querySelectorAll('.job-card summary').forEach(s => {
+  s.addEventListener('click', function(e){ e.preventDefault(); }, true);
+});
+
+// Open modal via "Lees meer" button
+document.querySelectorAll('.job-card .leesmeer').forEach(btn => {
+  btn.addEventListener('click', function(e){
+    e.preventDefault();
+    e.stopPropagation();
+    const card = this.closest('.job-card');
+    const title = card.querySelector('h3') ? card.querySelector('h3').textContent.trim() : 'Vacature';
+    const content = card.querySelector('.job-content') ? card.querySelector('.job-content').innerHTML : '';
+    const modal = document.getElementById('vacatureModal');
+    const body = document.getElementById('modalBody');
+    body.innerHTML = '<h2 class="modal-title">' + title + '</h2>' + content;
+    modal.style.display = 'flex';
+  });
+});
+
+// Close modal
+document.addEventListener('click', function(e){
+  const modal = document.getElementById('vacatureModal');
+  if (!modal) return;
+  if (e.target.matches('.modal .close') || e.target === modal) {
+    modal.style.display = 'none';
+  }
+});
+</script>
 </body>
 </html>
