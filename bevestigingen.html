@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reserveringsbevestiging · Camping de Leeuwenkuil</title>
+  <link rel="icon" type="image/png" href="logo.png" />
+  <style>
+    :root {
+      --green: #2f6b3a;
+      --light: #fffdf6;
+      --border: #e4e6e3;
+      --accent: #f2b544;
+    }
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--light);
+      margin: 0;
+      padding: 0;
+      color: #17321b;
+    }
+    header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--light);
+      padding: 12px 20px;
+      border-bottom: 1px solid var(--border);
+    }
+    header img {
+      height: 48px;
+    }
+    header h1 {
+      font-size: 1.3rem;
+      color: var(--green);
+      margin: 0;
+    }
+    main {
+      max-width: 700px;
+      margin: 40px auto;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    }
+    h2 {
+      color: var(--green);
+      margin-top: 0;
+    }
+    .details-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 12px;
+    }
+    .details-table td {
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+    .details-table td:first-child {
+      color: #666;
+      width: 40%;
+    }
+    .muted {
+      color: #6b6b6b;
+      font-size: 0.9rem;
+    }
+    .btn {
+      display: inline-block;
+      background: var(--accent);
+      color: #000;
+      padding: 12px 18px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 700;
+      margin-top: 16px;
+    }
+    footer {
+      text-align: center;
+      padding: 16px;
+      color: #666;
+      font-size: 0.85rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="logo.png" alt="Camping de Leeuwenkuil" />
+    <h1>Camping de Leeuwenkuil</h1>
+  </header>
+
+  <main id="confirmation">
+    <h2>Reserveringsbevestiging</h2>
+    <p class="muted">Bekijk hier de details van je reservering.</p>
+
+    <div id="details"></div>
+
+    <a href="index.html" class="btn">Terug naar home</a>
+  </main>
+
+  <footer>© 2025 Camping de Leeuwenkuil</footer>
+
+  <script>
+    function getParams() {
+      const params = new URLSearchParams(window.location.search);
+      const data = {};
+      params.forEach((value, key) => data[key] = decodeURIComponent(value));
+      return data;
+    }
+
+    function renderDetails() {
+      const d = getParams();
+      const container = document.getElementById("details");
+
+      if (!d.first) {
+        container.innerHTML = "<p><em>Geen reserveringsgegevens gevonden.</em></p>";
+        return;
+      }
+
+      const html = `
+        <table class="details-table">
+          <tr><td>Naam</td><td><strong>${d.first || ''} ${d.last || ''}</strong></td></tr>
+          <tr><td>E-mail</td><td>${d.email || ''}</td></tr>
+          <tr><td>Accommodatie</td><td>${d.accom || ''}</td></tr>
+          <tr><td>Aankomst</td><td>${d.start || ''}</td></tr>
+          <tr><td>Vertrek</td><td>${d.end || ''}</td></tr>
+          <tr><td>Aantal nachten</td><td>${d.nights || ''}</td></tr>
+          <tr><td>Totaalbedrag</td><td><strong>€${d.total || ''}</strong></td></tr>
+          <tr><td>Opmerkingen</td><td>${d.notes || '—'}</td></tr>
+        </table>
+      `;
+
+      container.innerHTML = html;
+    }
+
+    renderDetails();
+  </script>
+</body>
+</html>
