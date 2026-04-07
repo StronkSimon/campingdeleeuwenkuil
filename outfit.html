@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Camping de Leeuwenkuil</title>
+<link rel="icon" type="image/ico" href="myfavicon.ico" />
+
+<style>
+:root {
+  --green:#2f6b3a;
+  --gold:#f2b544;
+  --bg:#fffdf6;
+  --ink:#17321b;
+}
+
+html,body {
+  margin:0;
+  padding:0;
+  background:var(--bg);
+  color:var(--ink);
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+}
+
+.wrap {
+  max-width:960px;
+  margin-inline:auto;
+  padding:24px;
+}
+
+header {
+  display:flex;
+  align-items:center;
+  justify-content: space-between;
+  gap:16px;
+  padding-block:16px;
+}
+
+header img {
+  width:72px;
+  height:72px;
+  object-fit:contain;
+}
+
+h1 {
+  font-size: clamp(1.6rem, 2.5vw + 1rem, 2.2rem);
+  margin:0;
+  color:var(--green);
+}
+
+.tagline {
+  color:#3c7f47;
+  margin-top:4px;
+}
+
+.hero {
+  margin: 24px 0;
+  background: #eaf4ec;
+  border:1px solid #d7eadc;
+  padding:20px;
+  border-radius:16px;
+}
+
+.hero p { margin: 0; font-size:1.05rem; }
+
+.cta {
+  display:inline-block;
+  margin-top:12px;
+  background:var(--green);
+  color:white;
+  text-decoration:none;
+  padding:10px 14px;
+  border-radius:10px;
+}
+
+section h2 {
+  color:var(--green);
+  margin-top:28px;
+}
+
+.card {
+  border:1px solid #e4e6e3;
+  border-radius:12px;
+  padding:16px;
+  background:white;
+}
+
+.two {
+  display:grid;
+  gap:16px;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 760px) {
+  .two { grid-template-columns: 1.1fr 1fr; }
+}
+
+footer {
+  margin-top:32px;
+  padding:16px;
+  text-align:center;
+  color:#5b6b5d;
+}
+
+.btn {
+  display:inline-block;
+  background:var(--gold);
+  color:black;
+  text-decoration:none;
+  padding:10px 14px;
+  border-radius:10px;
+  font-weight:600;
+}
+
+.warning {
+  background: #ffe5e5;
+  border: 1px solid #ffb3b3;
+  color: #7a1a1a;
+  padding: 12px 16px;
+  border-radius: 12px;
+  margin-bottom: 16px;
+  font-weight: 600;
+  text-align: center;
+}
+
+/* NAV */
+.topnav {
+  display:flex;
+  gap:10px;
+  margin-left:auto;
+}
+
+.topnav a {
+  display:inline-block;
+  background:var(--gold);
+  color:black;
+  text-decoration:none;
+  padding:10px 14px;
+  border-radius:10px;
+  font-weight:600;
+}
+
+@media (max-width: 600px) {
+  .topnav {
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 6px;
+  }
+}
+
+/* EVENT */
+.event-block { margin-top: 28px; }
+
+.event-wrap {
+  display:grid;
+  gap:16px;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 760px) {
+  .event-wrap { grid-template-columns: 1.05fr 1fr; }
+}
+
+.event-poster {
+  width:100%;
+  border-radius:16px;
+  border:1px solid #d7eadc;
+}
+
+.event-card {
+  border:1px solid #e4e6e3;
+  border-radius:16px;
+  padding:18px;
+  background:white;
+}
+
+.event-meta {
+  list-style:none;
+  padding:0;
+  margin:14px 0;
+  display:grid;
+  gap:8px;
+}
+
+.event-meta li {
+  border:1px solid #e4e6e3;
+  border-radius:10px;
+  padding:10px 12px;
+  background:#fffdf9;
+}
+
+.event-odz {
+  font-weight:700;
+  color:var(--green);
+}
+
+.event-note {
+  color:#6b6b6b;
+  font-size:.92rem;
+}
+</style>
+</head>
+
+<body>
+<div class="wrap">
+
+
+<header>
+  <div style="display:flex; align-items:center; gap:16px;">
+    <img src="logo.png" alt="logo"/>
+    <div>
+      <h1>Camping de Leeuwenkuil</h1>
+      <div class="tagline">Waar de faciliteiten kapot gaan, maar de sfeer nooit!</div>
+    </div>
+  </div>
+
+  <nav class="topnav">
+    <a href="index.html">Home</a>
+    <a href="boeken.html">Boeken</a>
+    <a href="staff.html">Staff</a>
+    <a href="werken-bij.html">Vacatures</a>
+  </nav>
+</header>
+
+<section class="event-block">
+  <h1>Outfit Inspiratie</h1>
+
+  <div class="event-wrap">
+    <div>
+      <img src="outfit.png" class="event-poster"/>
+    </div>
+
+    <div class="event-card">
+        <h4>
+            Omdat een outfit uit kiezen soms lastig kan zijn, bieden wij  onze gasten graag een stukje inspiratie.
+            Zie ons als je persoonlijke muze.
+            Op de afbeelding zijn al wat voorbeelden te zien, maar laat ook vooral je eigen fantasie er op los.
+        </h4>
+    </div>
+  </div>
+</section>
+
+<footer>
+  © <span id="y"></span> Camping de Leeuwenkuil
+</footer>
+
+<script>
+document.getElementById("y").textContent = new Date().getFullYear();
+</script>
+
+</div>
+</body>
+</html>

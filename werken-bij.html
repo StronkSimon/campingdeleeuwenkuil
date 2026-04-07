@@ -104,9 +104,12 @@ header { justify-content: space-between; }
 <img alt="Camping de Leeuwenkuil logo" height="72" src="logo.png" width="72"/>
 <div>
 <h1>Camping de Leeuwenkuil</h1>
-<div class="tagline">Knus, groen &amp; een tikkie leeuwachtig 🦁⛺</div>
+<div class="tagline">Waar de faciliteiten kapot gaan, maar de sfeer nooit!</div>
 </div>
-<nav class="topnav"><a href="index.html">Home</a><a href="staff.html">Staff</a><a href="werken-bij.html">Vacatures</a><a href="boeken.html">Boeken</a></nav></header>
+<nav class="topnav">    <a href="index.html">Home</a>
+    <a href="boeken.html">Boeken</a>
+    <a href="staff.html">Staff</a>
+    <a href="werken-bij.html">Vacatures</a></nav></header>
 <main>
 <section class="hero">
 <h1>Werken bij Camping de Leeuwenkuil</h1>
@@ -147,7 +150,13 @@ header { justify-content: space-between; }
 <p>Niks gevonden dat past? Stuur je CV en korte motivatie naar <a href="mailto:info@campingdeleeuwenkuil.nl">info@campingdeleeuwenkuil.nl</a>. We denken graag mee.</p>
 </section>
 </main>
-<footer>© 2026 Camping de Leeuwenkuil</footer>
+<footer>
+  © <span id="y"></span> Camping de Leeuwenkuil
+</footer>
+
+<script>
+document.getElementById("y").textContent = new Date().getFullYear();
+</script>
 </div>
 <style>
     .jobs-grid { display:grid; gap:16px; grid-template-columns: 1fr; }

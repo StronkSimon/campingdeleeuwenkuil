@@ -99,7 +99,13 @@
     <a href="index.html" class="btn">Terug naar home</a>
   </main>
 
-  <footer>© 2026 Camping de Leeuwenkuil</footer>
+  <footer>
+  © <span id="y"></span> Camping de Leeuwenkuil
+</footer>
+
+<script>
+document.getElementById("y").textContent = new Date().getFullYear();
+</script>
 
   <script>
     function getParams() {
